@@ -1,0 +1,89 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+.tela-celular {
+    width: 310px;
+    height: 670px;
+    background-color: #eaf8dc;
+    position: relative;
+    overflow: hidden;
+}
+.fundo{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: fill;
+    z-index: 1;
+}
+.conteudo{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 160px;
+}
+.logo{
+    width: 85%;
+    height: auto;
+    object-fit: contain;
+}
+.botao-jogar{
+    width: 170px;
+    height: 45px;
+    margin-top: 80px;
+    border: 1px solid #168b19;
+    border-radius: 30px;
+    background-color: #25aa23;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.botao-jogar {
+    width: 170px;
+    height: 45px;
+    margin-top: 80px;
+    border: 1px solid #168b19;
+    border-radius: 30px;
+    background-color: #25aa23;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+
+    /* Novas propriedades */
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.botao-jogar:hover{
+    background-color: #188d19;
+}
+@media (max-width: 400px){
+    body {
+        background-color: #eaf8dc;
+    }
+
+    .tela-celular {
+        width: 100%;
+        height: 100vh;
+    }
+}

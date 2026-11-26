@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    /* Fundo divertido com bolinhas coloridas suaves */
+    background-color: #e0f7fa;
+    background-image: radial-gradient(#ff80ab 2px, transparent 2px), radial-gradient(#ffd54f 2px, #e0f7fa 2px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: flex-start; /* Alinha o conteúdo no topo em vez do centro */
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 12px 12px 12px; /* Margem superior discreta de 15px */
+}
+
+h1, h2 {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    font-size: 46px;
+    color: #ffffff;
+    -webkit-text-stroke: 1.5px #000000;
+    text-shadow: 2px 2px 0px #ff4081;
+    margin-bottom: 10px;
+    margin-top: -10px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+#silabas {
+    max-width: 580px;
+    max-height: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 12px;
+    background-color: #fff9c4;
+    border: 3px solid #000000;
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 4px 0px #fbc02d;
+}
+
+/* Peças das sílabas e botão verificar */
+.silaba, #verificar {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    padding: 8px 16px;
+    margin: 6px;
+    border-radius: 12px;
+    cursor: grab;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 3px 0px #000000;
+    transition: transform 0.15s, box-shadow 0.15s, background-color 0.15s;
+}
+
+#verificar {
+    cursor: pointer;
+}
+
+.silaba:hover, #verificar:hover {
+    transform: translateY(-3px) rotate(-2deg);
+    background-color: #fffde7;
+    box-shadow: 0 5px 0px #000000;
+}
+
+.silaba:active, #verificar:active {
+    cursor: grabbing;
+    transform: translateY(2px);
+    box-shadow: 0 1px 0px #000000;
+}
+
+#caixa {
+    width: 85%;
+    max-width: 580px;
+    min-height: 130px;
+    border: 3px dashed #000000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8bbd0;
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 4px 0px #f06292;
+}
+
+.caixa {
+    width: 72px;
+    height: 72px;
+    margin: 6px;
+    border: 2px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 14px;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 3px 0px #000000;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#silabas-aleatorias {
+    width: 480px;
+    height: 270px;
+    margin: 6px;
+    padding: 10px;
+    border: 2px solid #000000;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 0px #000000;
+    transition: transform 0.15s, box-shadow 0.15s;
+
+    /* Configuração da grade 3x3 */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+}
+
+#silabas-aleatorias > div {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #fff9c4;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    box-shadow: 0 3px 0px #000000;
+    cursor: grab;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.caixa:hover, #silabas-aleatorias:hover {
+    transform: scale(1.04);
+    background-color: #e1f5fe;
+    box-shadow: 0 5px 0px #000000;
+}

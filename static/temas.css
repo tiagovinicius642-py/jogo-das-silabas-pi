@@ -1,0 +1,105 @@
+:root{
+    --verde-header: #0ec672;
+    --verde-painel: #e9f9df;
+    --verde-texto: #1faa3c;
+    --amarelo: #ffc400;
+    --branco: #fff;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ddd;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    padding: 0;
+}
+.geral{
+    width: 310px;
+    height: 670px;
+    background-color: var(--verde-header);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    position: relative;
+    flex: 0 0 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 60px;
+}
+.header__titulo{
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+.painel{
+    flex: 1;
+    background: var(--verde-painel);
+    border-radius: 28px 28px 0 0;
+    padding: 36px 16px calc(24px + env(safe-area-inset-bottom));
+    overflow-y: auto;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 12px;
+    justify-items: center;
+}
+.tema{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    width: 100%;
+}
+.tema img{
+    width: 100%;
+    max-width: 100px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--branco);
+    border: 3px solid var(--branco);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+    transition: transform .15s ease;
+}
+.tema:active img{
+    transform: scale(.94);
+}
+.tema span{
+    color: var(--verde-texto);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+@media (max-width: 400px){
+
+    body {
+        background: var(--verde-painel);
+    }
+
+    .geral {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+    }
+}

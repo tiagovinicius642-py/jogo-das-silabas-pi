@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08c875">
+
+    <title>Jogo</title>
+
+    <link rel="stylesheet" href="static/principal.css">
+</head>
+
+<body>
+
+<div class="app">
+
+        
+    <header class="cabecalho">
+
+        <button
+            class="voltar"
+            onclick="history.back()"
+            aria-label="Voltar">
+        </button>
+
+        </header>
+
+        <main class="conteudo">
+
+          
+        <section class="categorias">
+
+            <div class="categoria"></div>
+            <div class="categoria"></div>
+            <div class="categoria"></div>
+            <div class="categoria"></div>
+
+        </section>
+
+        <section class="quadro-resposta">
+
+             <div class="espacos-silabas" id="espacosSilabas">
+
+                <div class="espaco" data-indice="0"></div>
+                <div class="espaco" data-indice="1"></div>
+                <div class="espaco" data-indice="2"></div>
+
+            </div>
+
+        </section>
+
+        <section class="painel-silabas" id="painelSilabas"> </section>
+
+        </main>
+
+</div>
+
+<script src="principal.js"></script>
+
+</body>
+</html>

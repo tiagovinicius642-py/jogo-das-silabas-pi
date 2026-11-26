@@ -1,0 +1,321 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.4
+-- Dumped by pg_dump version 17.4
+
+-- Started on 2026-11-25 16:03:00
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 217 (class 1259 OID 16406)
+-- Name: nichos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.nichos (
+    id integer NOT NULL,
+    nicho character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.nichos OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16409)
+-- Name: nichos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.nichos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.nichos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4908 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: nichos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.nichos_id_seq OWNED BY public.nichos.id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 16410)
+-- Name: palavras; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.palavras (
+    id_palavra integer NOT NULL,
+    id_nicho integer NOT NULL,
+    palavra character varying(100) NOT NULL,
+    silaba character varying(100) NOT NULL,
+    cor character varying(100),
+    img character varying(100)
+);
+
+
+ALTER TABLE public.palavras OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16413)
+-- Name: palavras_id_palavra_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.palavras_id_palavra_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.palavras_id_palavra_seq OWNER TO postgres;
+
+--
+-- TOC entry 4909 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: palavras_id_palavra_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.palavras_id_palavra_seq OWNED BY public.palavras.id_palavra;
+
+
+--
+-- TOC entry 4747 (class 2604 OID 16536)
+-- Name: nichos id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nichos ALTER COLUMN id SET DEFAULT nextval('public.nichos_id_seq'::regclass);
+
+
+--
+-- TOC entry 4748 (class 2604 OID 16537)
+-- Name: palavras id_palavra; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.palavras ALTER COLUMN id_palavra SET DEFAULT nextval('public.palavras_id_palavra_seq'::regclass);
+
+
+--
+-- TOC entry 4899 (class 0 OID 16406)
+-- Dependencies: 217
+-- Data for Name: nichos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.nichos (id, nicho) FROM stdin;
+1	frutas
+2	animais
+3	cores
+4	universo
+\.
+
+
+--
+-- TOC entry 4901 (class 0 OID 16410)
+-- Dependencies: 219
+-- Data for Name: palavras; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.palavras (id_palavra, id_nicho, palavra, silaba, cor, img) FROM stdin;
+644	1	Abacate	a&ba&ca&te	#2d570c	/static/uploads/abacate.png
+645	1	Abacaxi	a&ba&ca&xi	#f6b42d	/static/uploads/abacaxi.png
+646	1	Acerola	a&ce&ro&la	#b20502	/static/uploads/acerola.png
+647	1	Ameixa	a&mei&xa	#68254b	/static/uploads/ameixa.png
+648	1	Amora	a&mo&ra	#28263d	/static/uploads/amora.png
+649	1	Açaí	a&ça&í	#59456a	/static/uploads/açaí.png
+650	1	Banana	ba&na&na	#fdda05	/static/uploads/banana.png
+651	1	Caju	ca&ju	#fbc967	/static/uploads/caju.png
+652	1	Cereja	ce&re&ja	#e4252b	/static/uploads/cereja.png
+653	1	Coco	co&co	#e9e6d8	/static/uploads/coco.png
+654	1	Cupuaçu	cu&pu&a&çu	#c07239	/static/uploads/cupuaçu.png
+655	1	Figo	fi&go	#6c3b6f	/static/uploads/figo.png
+656	1	Framboesa	fram&bo&e&sa	#bd052c	/static/uploads/framboesa.png
+657	1	Goiaba	goi&a&ba	#a1a535	/static/uploads/goiaba.png
+658	1	Jabuticaba	ja&bu&ti&ca&ba	#181519	/static/uploads/jabuticaba.png
+659	1	Kiwi	ki&wi	#87c10b	/static/uploads/kiwi.png
+660	1	Laranja	la&ran&ja	#fd9d09	/static/uploads/laranja.png
+661	1	Limão	li&mão	#8fb00b	/static/uploads/limão.png
+662	1	Maçã	ma&çã	#c7271f	/static/uploads/maçã.png
+663	1	Mamão	ma&mão	#fd8101	/static/uploads/mamão.png
+664	1	Manga	man&ga	#f3a734	/static/uploads/manga.png
+665	1	Maracujá	ma&ra&cu&já	#f5d851	/static/uploads/maracujá.png
+666	1	Melancia	me&lan&ci&a	#258744	/static/uploads/melancia.png
+667	1	Morango	mo&ran&go	#d10102	/static/uploads/morango.png
+668	1	Uva	u&va	#651fa3	/static/uploads/uva.png
+669	2	Cachorro	ca&chor&ro	#fdb257	/static/uploads/cachorro.png
+670	2	Gato	ga&to	#edb385	/static/uploads/gato.png
+671	2	Cavalo	ca&va&lo	#c05e04	/static/uploads/cavalo.png
+672	2	Vaca	va&ca	#faf7eb	/static/uploads/vaca.png
+673	2	Porco	por&co	#fbc5b9	/static/uploads/porco.png
+674	2	Ovelha	o&ve&lha	#f6e7cb	/static/uploads/ovelha.png
+675	2	Cabra	ca&bra	#d4a266	/static/uploads/cabra.png
+676	2	Coelho	co&e&lho	#efb66f	/static/uploads/coelho.png
+677	2	Galinha	ga&li&nha	#d4730f	/static/uploads/galinha.png
+678	2	Galo	ga&lo	#ca4814	/static/uploads/galo.png
+679	2	Pato	pa&to	#faf2e1	/static/uploads/pato.png
+680	2	Pavão	pa&vão	#39828b	/static/uploads/pavão.png
+681	2	Águia	á&guia	#4a2916	/static/uploads/águia.png
+682	2	Coruja	co&ru&ja	#c57117	/static/uploads/coruja.png
+683	2	Papagaio	pa&pa&gai&o	#6e9828	/static/uploads/papagaio.png
+684	2	Arara	a&ra&ra	#ec2f1f	/static/uploads/arara.png
+685	2	Rato	ra&to	#9da4a6	/static/uploads/rato.png
+686	2	Morcego	mor&ce&go	#121112	/static/uploads/morcego.png
+687	2	Preguiça	pre&gui&ça	#b28d6b	/static/uploads/preguiça.png
+688	2	Tucano	tu&ca&no	#1c1b1f	/static/uploads/tucano.png
+689	2	Leão	le&ão	#f8a752	/static/uploads/leão.png
+690	2	Elefante	e&le&fan&te	#bbc3c5	/static/uploads/elefante.png
+691	2	Girafa	gi&ra&fa	#d86b0e	/static/uploads/girafa.png
+692	2	Macaco	ma&ca&co	#9b5122	/static/uploads/macaco.png
+693	2	Zebra	ze&bra	#33313d	/static/uploads/zebra.png
+694	3	Vermelho	ver&me&lho	#f82d25	/static/uploads/Vermelho.png
+695	3	Azul	a&zul	#004aad	/static/uploads/Azul.png
+696	3	Amarelo	a&ma&re&lo	#ffe500	/static/uploads/Amarelo.png
+697	3	Verde	ver&de	#457a00	/static/uploads/Verde.png
+698	3	Laranja	la&ran&ja	#ff751f	/static/uploads/Laranja(2).png
+699	3	Roxo	ro&xo	#6b1fad	/static/uploads/Roxo.png
+700	3	Rosa	ro&sa	#ff1fa9	/static/uploads/Rosa.png
+701	3	Marrom	mar&rom	#642f19	/static/uploads/Marrom.png
+702	3	Preto	pre&to	#000000	/static/uploads/Preto.png
+703	3	Branco	bran&co	#ffffff	/static/uploads/Branco.png
+704	3	Cinza	cin&za	#b4b4b4	/static/uploads/Cinza.png
+705	3	Dourado	dou&ra&do	#D4AF37	/static/uploads/Dourado.png
+706	3	Marsala	mar&sa&la	#A72836	/static/uploads/Marsala.png
+707	3	Turquesa	tur&que&sa	#40E0D0	/static/uploads/Turquesa.png
+708	3	Violeta	vi&o&le&ta	#9400D3	/static/uploads/Violeta.png
+709	3	Lilás	li&lás	#C8A2C8	/static/uploads/Lilás.png
+710	3	Fúcsia	fúc&sia	#FF00FF	/static/uploads/Fúcsia.png
+711	3	Ciano	ci&a&no	#3dffff	/static/uploads/Ciano.png
+712	3	Bordô	bor&dô	#800032	/static/uploads/Bordô.png
+713	3	Creme	cre&me	#fcf9da	/static/uploads/Creme.png
+714	3	Coral	co&ral	#ff7f50	/static/uploads/Coral.png
+715	3	Salmão	sal&mão	#FA8072	/static/uploads/Salmão.png
+716	3	Lavanda	la&van&da	#e6e6fa	/static/uploads/Lavanda.png
+717	3	Vinho	vi&nho	#800020	/static/uploads/Vinho.png
+718	3	Bronze	bron&ze	#CD7F32	/static/uploads/Bronze.png
+719	4	Sol	sol	#f9b32e	/static/uploads/Sol.png
+720	4	Lua	lu&a	#fdd335	/static/uploads/Lua.png
+721	4	Terra	ter&ra	#338cda	/static/uploads/Terra.png
+722	4	Marte	mar&te	#e72f29	/static/uploads/Marte.png
+723	4	Júpiter	jú&pi&ter	#e8845b	/static/uploads/Júpiter.png
+724	4	Saturno	sa&tur&no	#f9a237	/static/uploads/Saturno.png
+725	4	Urano	u&ra&no	#3b6f72	/static/uploads/Urano.png
+726	4	Netuno	ne&tu&no	#8eaadb	/static/uploads/Netuno.png
+727	4	Mercúrio	mer&cú&ri&o	#aa4936	/static/uploads/Mercúrio.png
+728	4	Vênus	vê&nus	#f48433	/static/uploads/Vênus.png
+729	4	Plutão	plu&tão	#cb5d29	/static/uploads/Plutão.png
+730	4	Estrela	es&tre&la	#fbca42	/static/uploads/Estrela.png
+731	4	Galáxia	ga&lá&xi&a	#23266e	/static/uploads/Galáxia.png
+732	4	Cometa	co&me&ta	#f6d859	/static/uploads/Cometa.png
+733	4	Asteroide	as&te&roi&de	#8ad9d4	/static/uploads/Asteroide.png
+734	4	Meteoro	me&te&o&ro	#575e68	/static/uploads/Meteoro.png
+735	4	Constelação	cons&te&la&ção	#cc9f3a	/static/uploads/Constelação.png
+736	4	Via Láctea	vi&a lác&te&a	#b88bd6	/static/uploads/Via_Láctea.png
+737	4	Astronauta	as&tro&nau&ta	#30387b	/static/uploads/Astronauta.png
+738	4	Foguete	fo&gue&te	#e63811	/static/uploads/Foguete.png
+739	4	Satélite	sa&té&li&te	#e8e8e8	/static/uploads/Satélite.png
+740	4	Telescópio	te&les&có&pi&o	#243753	/static/uploads/Telescópio.png
+741	4	Universo	u&ni&ver&so	#120348	/static/uploads/Universo.png
+742	4	Espaço	es&pa&ço	#07060c	/static/uploads/Espaço.png
+743	4	Aurora boreal	au&ro&ra bo&re&al	#9173c8	/static/uploads/Aurora_boreal.png
+744	4	Sol	sol	#f9b32e	/static/uploads/Sol.png
+745	4	Lua	lu&a	#fdd335	/static/uploads/Lua.png
+746	4	Terra	ter&ra	#338cda	/static/uploads/Terra.png
+747	4	Marte	mar&te	#e72f29	/static/uploads/Marte.png
+748	4	Júpiter	jú&pi&ter	#e8845b	/static/uploads/Júpiter.png
+749	4	Saturno	sa&tur&no	#f9a237	/static/uploads/Saturno.png
+750	4	Urano	u&ra&no	#3b6f72	/static/uploads/Urano.png
+751	4	Netuno	ne&tu&no	#8eaadb	/static/uploads/Netuno.png
+752	4	Mercúrio	mer&cú&ri&o	#aa4936	/static/uploads/Mercúrio.png
+753	4	Vênus	vê&nus	#f48433	/static/uploads/Vênus.png
+754	4	Plutão	plu&tão	#cb5d29	/static/uploads/Plutão.png
+755	4	Estrela	es&tre&la	#fbca42	/static/uploads/Estrela.png
+756	4	Galáxia	ga&lá&xi&a	#23266e	/static/uploads/Galáxia.png
+757	4	Cometa	co&me&ta	#f6d859	/static/uploads/Cometa.png
+758	4	Asteroide	as&te&roi&de	#8ad9d4	/static/uploads/Asteroide.png
+759	4	Meteoro	me&te&o&ro	#575e68	/static/uploads/Meteoro.png
+760	4	Constelação	cons&te&la&ção	#cc9f3a	/static/uploads/Constelação.png
+761	4	Via Láctea	vi&a lác&te&a	#b88bd6	/static/uploads/Via_Láctea.png
+762	4	Astronauta	as&tro&nau&ta	#30387b	/static/uploads/Astronauta.png
+763	4	Foguete	fo&gue&te	#e63811	/static/uploads/Foguete.png
+764	4	Satélite	sa&té&li&te	#e8e8e8	/static/uploads/Satélite.png
+765	4	Telescópio	te&les&có&pi&o	#243753	/static/uploads/Telescópio.png
+766	4	Universo	u&ni&ver&so	#120348	/static/uploads/Universo.png
+767	4	Espaço	es&pa&ço	#07060c	/static/uploads/Espaço.png
+768	4	Aurora boreal	au&ro&ra bo&re&al	#9173c8	/static/uploads/Aurora_boreal.png
+\.
+
+
+--
+-- TOC entry 4910 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: nichos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.nichos_id_seq', 4, true);
+
+
+--
+-- TOC entry 4911 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: palavras_id_palavra_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.palavras_id_palavra_seq', 768, true);
+
+
+--
+-- TOC entry 4750 (class 2606 OID 16417)
+-- Name: nichos nichos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.nichos
+    ADD CONSTRAINT nichos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4752 (class 2606 OID 16419)
+-- Name: palavras palavras_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.palavras
+    ADD CONSTRAINT palavras_pkey PRIMARY KEY (id_palavra);
+
+
+--
+-- TOC entry 4753 (class 2606 OID 16420)
+-- Name: palavras palavras_id_nicho_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.palavras
+    ADD CONSTRAINT palavras_id_nicho_fkey FOREIGN KEY (id_nicho) REFERENCES public.nichos(id);
+
+
+-- Completed on 2026-11-25 16:03:00
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#16c943">
+  <title>Resposta correta!</title>
+  <link rel="stylesheet" href="static/resultado.css">
+  <script src="static/resultado.js" defer></script>
+</head>
+<body>
+  <main class="tela resultado--acerto" data-status="acerto">
+
+    <div class="confetes" id="confetes" aria-hidden="true"></div>
+
+    <section class="conteudo">
+      <header class="mensagem">
+        <h1>PARABÉNS!</h1>
+        <p>VOCÊ ACERTOU!</p>
+      </header>
+
+      <div class="imagem-area">
+        <img id="imagem-palavra" class="imagem-palavra" src="" alt="Imagem da palavra" hidden>
+        <div id="imagem-fallback" class="imagem-fallback" aria-hidden="true">⭐</div>
+      </div>
+
+      <div class="nome-elemento" id="nomeElemento">
+        BANANA
+      </div>      
+    <button onclick=location.href="" id="botao-proxima" class="botao botao--proxima" type="button">PRÓXIMA <span aria-hidden="true">➜</span></button>
+    </section>
+  </main>
+</body>
+</html>

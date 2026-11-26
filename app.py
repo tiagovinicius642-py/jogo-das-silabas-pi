@@ -5,8 +5,8 @@ import os
 
 flask = Flask(__name__)
 # Em produção, use uma variável de ambiente; para testes locais, pode usar uma string fixa
-flask.secret_key = os.environ.get("SECRET_KEY", "uma-chave-secreta-fixa-para-dev")
-
+#flask.secret_key = os.environ.get("SECRET_KEY", "uma-chave-secreta-fixa-para-dev")
+flask.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
 @flask.before_request
 def inicializar_progresso():
@@ -61,24 +61,32 @@ def puzzle_completo():
     nicho = int(data.get('nicho', 0))
 
     session['puzzle'] = puzzle
+    session['ultimo_nicho'] = nicho
 
-    if nicho == 1:
-        session['progresso']['frutas'] += 1
+    mapa = {
+        1: 'frutas',
+        2: 'animais',
+        3: 'cores',
+        4: 'universo'
+    }
 
-    elif nicho == 2:
-        session['progresso']['animais'] += 1
-
-    elif nicho == 3:
-        session['progresso']['cores'] += 1
-
-    elif nicho == 4:
-        session['progresso']['universo'] += 1
-
+    session['progresso'][mapa[nicho]] += 1
     session.modified = True
 
     return jsonify({
         "success": True
     }), 200
+
+@flask.route('/acerto')
+def tela_acerto():
+
+    id_nicho = session.get('ultimo_nicho', 1)
+
+    return render_template(
+        'acerto.html',
+        id_nicho=id_nicho
+    )
+
 
 @flask.route('/nicho/<string:num>')
 def mostrar_nicho(num):
@@ -149,7 +157,7 @@ def mostrar_nicho(num):
     puzzle_id = palavra['id_palavra']
 
     return render_template(
-        'index(meu).html',
+        'level.html',
         silabas=silabas,
         silabas_específicas=silabas_específicas,
         var_imagem=var_imagem,

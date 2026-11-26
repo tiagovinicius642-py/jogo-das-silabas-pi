@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/principal.css">
+    <title>Document</title>
+</head>
+
+<body>
+<style>
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+:root{
+    --verde: #08c875;
+    --verde-escuro: #079d35;
+    --fundo: #eaf8df;
+    --branco: #fff;
+    --amarelo: #ffbd19;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ddd;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.app{
+    position: relative;
+    isolation: isolate;
+    width: min(100vw, 310px);
+    height: min(100dvh, 670px);
+    min-height: 520px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--verde);
+}
+.cabecalho{
+    position: relative;
+    width: 100%;
+    height: 69px;
+    min-height: 69px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 13px;
+    background: var(--verde);
+    color: white;
+}
+.voltar{
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.voltar::before{
+    content: "";
+    position: absolute;
+    width: 17px;
+    height: 2px;
+    background: var(--verde);
+    left: 11px;
+    top: 17px;
+}
+.voltar::after{
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    border-left: 2px solid var(--verde);
+    border-bottom: 2px solid var(--verde);
+    transform: rotate(45deg);
+    left: 9px;
+    top: 13px;
+}
+.conteudo{
+    position: relative;
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    background: var(--fundo);
+    border-radius: 30px 30px 0 0;
+    overflow: hidden;
+}
+.categorias{
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 235px;
+    display: grid;
+    grid-template-columns: repeat(4, 55px);
+    gap: 5px;
+    z-index: 3;
+}
+.categoria{
+    width: 55px;
+    height: 60px;
+    background: white;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.22);
+}
+.quadro-resposta{
+    position: absolute;
+    top: 260px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 186px;
+    height: 82px;
+    padding: 10px;
+    border-radius: 14px;
+    background: rgba(8, 200, 117, 0.19);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.espacos-silabas{
+    width: 100%;
+    height: 47px;
+    padding: 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+}
+.espaco {
+    flex: 1;
+    min-width: 0;
+    height: 46px;
+    border: 1.5px dashed #444;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    color: #222;
+}
+.espaco.preenchido {
+    border: 1.5px solid var(--verde);
+}
+.painel-silabas {
+    position: absolute;
+    top: 352px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 185px;
+    padding: 10px;
+    background: white;
+    border-radius: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(3, 45px);
+    justify-content: center;
+    align-content: center;
+    gap: 6px 12px;
+}
+.silaba{
+    width: 48px;
+    height: 45px;
+    border: none;
+    border-radius: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+}
+.silaba.arrastando{
+    opacity: 0.3;
+}
+.flutuante{
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+@media (max-width: 500px){
+
+    body {
+        background: var(--verde);
+    }
+
+    .app {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+    }
+}
+@media (max-height: 560px){
+
+    .categorias {
+        top: 10px;
+    }
+
+    .quadro-resposta {
+        top: 190px;
+    }
+
+    .painel-silabas {
+        top: 282px;
+        height: 165px;
+    }
+}
+
+
+/* ==============================
+   ADAPTAÇÃO DO JOGO
+============================== */
+
+.app {
+    width: min(100vw, 310px);
+    height: min(100dvh, 670px);
+    min-height: 520px;
+}
+
+.cabecalho h1 {
+    color: white;
+    font-size: 18px;
+    margin: 0;
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 12px;
+    overflow-y: auto;
+}
+
+.conteudo h1 {
+    font-size: 32px;
+    margin: 5px 0 10px;
+    color: var(--verde-escuro);
+}
+
+.imagem-palavra {
+    width: 200px;
+    max-width: 85%;
+    height: 140px;
+    object-fit: contain;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 5px;
+}
+
+#caixa {
+    width: 100%;
+    min-height: 65px;
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    background: rgba(8, 200, 117, 0.19);
+    border-radius: 14px;
+}
+
+.caixa {
+    flex: 1;
+    min-width: 25px;
+    max-width: 55px;
+    height: 45px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1.5px dashed #444;
+    border-radius: 12px;
+}
+
+#silabas-aleatorias {
+    width: 70%;
+    min-height: 150px;
+    padding: 12px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 45px;
+
+    justify-items: center;
+    align-items: center;
+    gap: 5px;
+
+    background: white;
+    border-radius: 20px;
+}
+
+.silaba {
+    width: 51px;
+    height: 46px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 14px;
+
+    font-size: 15px;
+    font-weight: 900;
+
+    cursor: grab;
+    user-select: none;
+}
+
+.area-botao {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#verificar {
+    width: 150px;
+    height: 45px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: var(--verde);
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#verificar:active {
+    transform: scale(0.96);
+}
+
+/* CELULARES */
+
+@media (max-width: 500px) {
+
+    body {
+        background: var(--verde);
+    }
+
+    .app {
+        width: 100%;
+        height: 100dvh;
+        min-height: 0;
+    }
+}
+
+</style>
+    <div class="app">
+
+        <!-- CABEÇALHO -->
+        <header class="cabecalho">
+
+            <button class="voltar" onclick="history.back()" aria-label="Voltar">
+            </button>
+
+            <h1>{{ meter }}</h1>
+
+        </header>
+
+        <!-- IMAGEM ABAIXO DO CABEÇALHO -->
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudo">
+
+            <h1>{{ var_palavra }}</h1>
+
+            <img
+                src="{{ var_imagem }}"
+                alt="Imagem de teste"
+                class="imagem-palavra"
+            >
+
+            <div class="container">
+
+                <!-- CAIXAS DE RESPOSTA -->
+                <div id="caixa">
+
+                    {% for silaba in silabas_específicas %}
+                        <div class="caixa">
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- SÍLABAS ALEATÓRIAS -->
+                <div id="silabas-aleatorias">
+
+                    {% for silaba, cor in silabas %}
+                        <div
+                            class="silaba"
+                            draggable="true"
+                            style="background-color: {{ cor }};"
+                        >
+                            {{ silaba }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- BOTÃO -->
+                <div class="area-botao">
+
+                    <button id="verificar">
+                        Verificar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script>
+
+        // Este código foi feito com o Copilot. De resto, é tudo meu.
+
+        const silabas = document.querySelectorAll('.silaba');
+        const caixas = document.querySelectorAll('.caixa');
+        const verificarButton = document.getElementById('verificar');
+
+        const targetWord = "{{ var_palavra2 }}";
+        const targetId = Number("{{ puzzle_id }}");
+        const IdNicho = Number("{{ id_nicho }}")
+
+        let selectedSilaba = null;
+
+        // When a syllable starts being dragged
+
+        silabas.forEach(silaba => {
+
+            silaba.addEventListener('dragstart', function(e) {
+
+                selectedSilaba = e.target;
+
+                e.dataTransfer.setData('text/plain', e.target.id);
+
+            });
+
+        });
+
+        // Allow syllables to be dropped into each box
+
+        caixas.forEach(caixa => {
+
+            caixa.addEventListener('dragover', function(e) {
+
+                e.preventDefault();
+
+            });
+
+            caixa.addEventListener('drop', function(e) {
+
+                e.preventDefault();
+
+                if (selectedSilaba) {
+
+                    // If the box already contains a syllable,
+                    // return that syllable to the syllable area.
+
+                    const existingSilaba = caixa.querySelector('.silaba');
+
+                    if (existingSilaba) {
+
+                        document.getElementById('silabas-aleatorias')
+                            .appendChild(existingSilaba);
+
+                    }
+
+                    // Put the dragged syllable inside this box.
+
+                    caixa.appendChild(selectedSilaba);
+
+                    selectedSilaba = null;
+
+                }
+
+            });
+
+        });
+
+        // Add event listener to the verification button
+
+        verificarButton.addEventListener('click', function() {
+
+            // Collect all syllables and form a word.
+
+            let formedWord = '';
+
+            caixas.forEach(caixa => {
+
+                const silaba = caixa.querySelector('.silaba');
+
+                if (silaba) {
+
+                    formedWord += silaba.textContent.trim();
+
+                }
+
+            });
+
+            // Check if the formed word matches the target word.
+
+            if (formedWord === targetWord) {
+
+                alert('Parabéns! Você formou a palavra correta: ' + formedWord);
+
+                // Send a POST request to the backend.
+
+                try {
+
+                    fetch("/puzzle_completo", {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            puzzle: targetId,
+                            nicho: IdNicho
+                        })
+
+                    })
+
+                    .then(response => {
+
+                        console.log("Status HTTP:", response.status);
+
+                        if (!response.ok) {
+
+                            throw new Error("Erro HTTP: " + response.status);
+
+                        }
+
+                        return response.json();
+
+                    })
+
+                    .then(data => {
+
+                        console.log("Resposta do Flask:", data);
+
+                        if (data.success) {
+
+                            window.location.reload();
+
+                        } else {
+
+                            alert("Erro no servidor: " + (data.message || "Desconhecido"));
+
+                        }
+
+                    })
+
+                    .catch(error => {
+
+                        console.error("Erro na comunicação:", error);
+
+                        alert("Erro na comunicação com o servidor. Tente novamente mais tarde.");
+
+                    });
+
+                } catch (error) {
+
+                    console.error("Erro inesperado:", error);
+
+                    alert("Ocorreu um erro inesperado. Tente novamente mais tarde.");
+
+                }
+
+            } else {
+
+                alert('A palavra formada está incorreta. Tente novamente! ' + formedWord);
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
